@@ -60,7 +60,8 @@ env:
   FLASH_TAG: eMMC_8Gb
   SOURCE_CODE: padavanonly(237)
   OUTPUT_FILENAME: padavanonly-2410-acesan-mt7981b-cmcc_xr30-emmc-sysupgrade
-
+  TZ: "Asia/Tokyo"
+  
 jobs:
   build:
     runs-on: ubuntu-22.04
