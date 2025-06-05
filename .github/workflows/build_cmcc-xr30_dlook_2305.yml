@@ -29,10 +29,6 @@ on:
         description: 'Upload Firmware To Release (ファームウェアをアップロードする)'
         type: boolean
         default: false
-      cache_toolchain:
-        description: 'Cache Toolchain (キャッシュツールチェーン)'
-        type: boolean
-        default: true
   schedule:
     - cron: '0 10 * * 0'
 
@@ -142,11 +138,10 @@ jobs:
         echo "SOURCE_REPO=$SOURCE_REPO" >> $GITHUB_ENV
 
     - name: Cache Toolchain (キャッシュツールチェーン)
-      if: (github.event.inputs.cache_toolchain == 'true' && github.event.inputs.cache_toolchain  != 'false') || contains(github.event.action, 'cache_toolchain') && !cancelled()
       uses: HiGarfield/cachewrtbuild@main
       with:
         ccache: false
-        mixkey: ${{ env.SOURCE_CODE }}-${{ secrets.DLOOK2305_REPO_BRANCH }}-${{ env.DEVICE_NAME }}
+        mixkey: ${{ env.DEVICE_NAME }}-${{ env.SOURCE_CODE }}-${{ secrets.DLOOK2305_REPO_BRANCH }}
         prefix: ${{ github.workspace }}/openwrt
 
     - name: Updata & install feeds (アップデートとフィードのインストール)
