@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc-xr30 ponly 24.10 hnat actions.
+name: Build cmcc-xr30 emmc ponly 24.10 hnat actions.
 
 on:
   workflow_dispatch:
