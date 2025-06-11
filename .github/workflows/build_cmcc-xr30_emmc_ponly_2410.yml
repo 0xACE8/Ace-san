@@ -187,6 +187,10 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
         echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
+    - name: Upgrading variables (変数のアップグレード)
+      run: |
+        echo "OUTPUT_FILENAME=${OUTPUT_FILENAME}_${FILE_DATE}" >> $GITHUB_ENV
+
     - name: View Disk Usage (ディスク使用量の表示)
       if: (!cancelled())
       run: df -hT
