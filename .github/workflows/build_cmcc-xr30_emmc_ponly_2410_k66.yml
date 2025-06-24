@@ -36,7 +36,7 @@ env:
   # anna 2410
   PONLY2410_K66_REPO_URL: ${{ secrets.PONLY2410_K66_REPO_URL }}
   PONLY2410_K66_REPO_BRANCH: ${{ secrets.PONLY2410_K66_REPO_BRANCH }}
-  PONLY2410_REPO_PATCH: ${{ secrets.PONLY2410_REPO_PATCH }}
+  PONLY2410_K66_REPO_PATCH: ${{ secrets.PONLY2410_K66_REPO_PATCH }}
   # cmcc-xr30-emmc
   CMCC_XR30_PONLY2410_K66_HOSTNAME: ${{ secrets.CMCC_XR30_PONLY2410_K66_HOSTNAME }}
   CMCC_XR30_PONLY2410_K66_CONFIG: ${{ secrets.CMCC_XR30_PONLY2410_K66_CONFIG }}
@@ -159,7 +159,7 @@ jobs:
         ${{ secrets.CMCC_XR30_PONLY2410_K66_CONFIG }}
         mv .config openwrt/.config
         cd openwrt
-        ${{ secrets.PONLY2410_REPO_PATCH }}
+        ${{ secrets.PONLY2410_K66_REPO_PATCH }}
         ${{ secrets.FIRMWARE_DIY_SCRIPT }}
         ${{ secrets.CMCC_XR30_PONLY2410_K66_HOSTNAME }}
         ${{ secrets.ARGON_THEME_CMCC }}
