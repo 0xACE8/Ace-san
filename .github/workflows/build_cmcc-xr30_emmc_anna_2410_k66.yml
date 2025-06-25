@@ -50,7 +50,7 @@ env:
   # token
   ACCESS_SHA512SUM: ${{ secrets.ACCESS_SHA512SUM }}
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-  ACCESS_REPACKAGE_FIRMWARE: ${{ secrets.ACCESS_REPACKAGE_FIRMWARE }}
+  ACCESS_REPACKAGE_SHA512: ${{ secrets.ACCESS_REPACKAGE_SHA512 }}
   # telegram bot
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -204,7 +204,7 @@ jobs:
         ls | grep -v *sysupgrade.bin | xargs rm -rdf
         mv *.bin ${{ env.OUTPUT_FILENAME }}.bin
         sha512sums -qq -r -P ${{ secrets.ACCESS_SHA512SUM }} sha512sums ${{ env.OUTPUT_FILENAME }}.bin
-        ${{ secrets.ACCESS_REPACKAGE_FIRMWARE }} ${{ env.OUTPUT_FILENAME }}.bin
+        ${{ secrets.ACCESS_REPACKAGE_SHA512 }} ${{ env.OUTPUT_FILENAME }}.bin
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
