@@ -38,9 +38,9 @@ env:
   DLOOK2305_K54_REPO_BRANCH: ${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
   DLOOK2305_K54_REPO_PATCH: ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
   # cmcc-xr30-emmc
-  CMCC_XR30_EMMC_DLOOK2305_HOSTNAME: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_HOSTNAME }}
-  CMCC_XR30_EMMC_DLOOK2305_CONFIG: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_CONFIG }}
-  CMCC_XR30_EMMC_DLOOK2305_BACKUP: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_BACKUP }}
+  CMCC_XR30_EMMC_DLOOK2305_K54_HOSTNAME: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_HOSTNAME }}
+  CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
+  CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP }}
   # feeds source
   ADD_FEED_SOURCE: ${{ secrets.ADD_FEED_SOURCE }}
   # diy script
@@ -184,13 +184,13 @@ jobs:
     - name: Load custom configuration (カスタム構成を読み込む)
       working-directory: ./openwrt
       run: |
-        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_CONFIG }}
+        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
         echo "load config done."
         ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
         echo "load repo patch done."
         ${{ secrets.FIRMWARE_DIY_SCRIPT }}
         echo "load firmware done."
-        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_HOSTNAME }}
+        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_HOSTNAME }}
         echo "load hostname done."
         ${{ secrets.ARGON_THEME_CMCC }}
         echo "load theme done."
@@ -199,7 +199,7 @@ jobs:
       if: (github.event.inputs.restore_configuration == 'true' && github.event.inputs.restore_configuration != 'false') || contains(github.event.action, 'restore_configuration') && !cancelled()
       working-directory: ./openwrt
       run: |
-        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_BACKUP }}
+        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP }}
         echo "load config backup done."
 
     - name: Download package (パッケージをダウンロード)
