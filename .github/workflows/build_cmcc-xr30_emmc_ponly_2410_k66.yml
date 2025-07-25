@@ -55,7 +55,7 @@ env:
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   # hardware & repo info
-  DEVICE_NAME: CMCC-XR30
+  DEVICE_NAME: CMCC-XR30-EMMC
   CPU_TAG: mt7981b
   FLASH_TAG: eMMC_8Gb
   SOURCE_CODE: padavanonly(237)
