@@ -60,7 +60,7 @@ env:
   FLASH_TAG: eMMC_8Gb
   SOURCE_CODE: dailook
   KERNEL_VERSION: kernel_5.4
-  OUTPUT_FILENAME: dailook-2305-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-sysupgrade
+  OUTPUT_FILENAME: dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-sysupgrade
   TZ: "Asia/Tokyo"
 
 jobs:
@@ -201,6 +201,7 @@ jobs:
       run: |
         ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP }}
         echo "load config backup done."
+        echo "OUTPUT_FILENAME=dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-configured-sysupgrade" >> $GITHUB_ENV
 
     - name: Download package (パッケージをダウンロード)
       id: package
