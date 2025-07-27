@@ -204,18 +204,18 @@ jobs:
         echo "OUTPUT_FILENAME=dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-configured-sysupgrade" >> $GITHUB_ENV
 
     - name: Download package (パッケージをダウンロード)
+      working-directory: ./openwrt
       id: package
       run: |
-        cd openwrt
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
     - name: Compile the firmware (ファームウェアをコンパイルする)
+      working-directory: ./openwrt
       id: compile
       run: |
-        cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
