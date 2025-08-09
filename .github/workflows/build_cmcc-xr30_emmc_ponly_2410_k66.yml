@@ -38,9 +38,9 @@ env:
   PONLY2410_K66_REPO_BRANCH: ${{ secrets.PONLY2410_K66_REPO_BRANCH }}
   PONLY2410_K66_REPO_PATCH: ${{ secrets.PONLY2410_K66_REPO_PATCH }}
   # cmcc-xr30-emmc
-  CMCC_XR30_PONLY2410_K66_HOSTNAME: ${{ secrets.CMCC_XR30_PONLY2410_K66_HOSTNAME }}
-  CMCC_XR30_PONLY2410_K66_CONFIG: ${{ secrets.CMCC_XR30_PONLY2410_K66_CONFIG }}
-  CMCC_XR30_PONLY2410_K66_BACKUP: ${{ secrets.CMCC_XR30_PONLY2410_K66_BACKUP }}
+  CMCC_XR30_EMMC_PONLY2410_K66_HOSTNAME: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_HOSTNAME }}
+  CMCC_XR30_EMMC_PONLY2410_K66_CONFIG: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG }}
+  CMCC_XR30_EMMC_PONLY2410_K66_BACKUP: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_BACKUP }}
   # feeds source
   ADD_FEED_SOURCE: ${{ secrets.ADD_FEED_SOURCE }}
   # diy script
@@ -55,12 +55,12 @@ env:
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   # hardware & repo info
-  DEVICE_NAME: CMCC-XR30-EMMC
+  DEVICE_NAME: CMCC_XR30-eMMC
   CPU_TAG: mt7981b
   FLASH_TAG: eMMC_8Gb
   SOURCE_CODE: padavanonly(237)
   KERNEL_VERSION: kernel_6.6
-  OUTPUT_FILENAME: padavanonly-24.10.1-acesan-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
+  OUTPUT_FILENAME: padavanonly-24.10-ss-ace-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
   TZ: "Asia/Tokyo"
 
 jobs:
@@ -156,19 +156,19 @@ jobs:
 
     - name: Load custom configuration (カスタム構成を読み込む)
       run: |
-        ${{ secrets.CMCC_XR30_PONLY2410_K66_CONFIG }}
+        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG }}
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.PONLY2410_K66_REPO_PATCH }}
         ${{ secrets.FIRMWARE_DIY_SCRIPT }}
-        ${{ secrets.CMCC_XR30_PONLY2410_K66_HOSTNAME }}
+        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_HOSTNAME }}
         ${{ secrets.ARGON_THEME_CMCC }}
 
     - name: Restore configuration archive (バックアップした構成アーカイブを復元する)
       if: (github.event.inputs.restore_configuration == 'true' && github.event.inputs.restore_configuration != 'false') || contains(github.event.action, 'restore_configuration') && !cancelled()
       working-directory: ./openwrt
       run: |
-        ${{ secrets.CMCC_XR30_PONLY2410_K66_BACKUP }}
+        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_BACKUP }}
 
     - name: Download package (パッケージをダウンロード)
       id: package
