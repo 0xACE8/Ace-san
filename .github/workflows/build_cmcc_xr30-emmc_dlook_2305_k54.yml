@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc-xr30 emmc dlook 23.05 kernel 5.4 actions.
+name: Build cmcc_xr30-emmc dlook 23.05 kernel 5.4 actions.
 
 on:
   workflow_dispatch:
@@ -38,7 +38,7 @@ env:
   DLOOK2305_K54_REPO_BRANCH: ${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
   DLOOK2305_K54_REPO_PATCH: ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
   # cmcc-xr30-emmc
-  CMCC_XR30_EMMC_DLOOK2305_K54_HOSTNAME: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_HOSTNAME }}
+  CMCC_XR30_EMMC_DLOOK2305_K54_PATCH: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_PATCH }}
   CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
   CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP }}
   # feeds source
@@ -55,9 +55,9 @@ env:
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   # hardware & repo info
-  DEVICE_NAME: CMCC-XR30-EMMC
+  DEVICE_NAME: CMCC_XR30-EMMC
   CPU_TAG: mt7981b
-  FLASH_TAG: eMMC_8Gb
+  FLASH_TAG: 8GB_eMMC
   SOURCE_CODE: dailook
   KERNEL_VERSION: kernel_5.4
   OUTPUT_FILENAME: dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-sysupgrade
@@ -190,7 +190,7 @@ jobs:
         echo "load repo patch done."
         ${{ secrets.FIRMWARE_DIY_SCRIPT }}
         echo "load firmware done."
-        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_HOSTNAME }}
+        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_PATCH }}
         echo "load hostname done."
         ${{ secrets.ARGON_THEME_CMCC }}
         echo "load theme done."
