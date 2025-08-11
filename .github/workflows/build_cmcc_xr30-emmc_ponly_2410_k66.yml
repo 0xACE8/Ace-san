@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc-xr30 emmc ponly 24.10 kernel 6.6 actions.
+name: Build cmcc_xr30-emmc ponly 24.10 kernel 6.6 actions.
 
 on:
   workflow_dispatch:
@@ -37,8 +37,8 @@ env:
   PONLY2410_K66_REPO_URL: ${{ secrets.PONLY2410_K66_REPO_URL }}
   PONLY2410_K66_REPO_BRANCH: ${{ secrets.PONLY2410_K66_REPO_BRANCH }}
   PONLY2410_K66_REPO_PATCH: ${{ secrets.PONLY2410_K66_REPO_PATCH }}
-  # cmcc-xr30-emmc
-  CMCC_XR30_EMMC_PONLY2410_K66_HOSTNAME: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_HOSTNAME }}
+  # cmcc_xr30-emmc
+  CMCC_XR30_EMMC_PONLY2410_K66_PATCH: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_PATCH }}
   CMCC_XR30_EMMC_PONLY2410_K66_CONFIG: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG }}
   CMCC_XR30_EMMC_PONLY2410_K66_BACKUP: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_BACKUP }}
   # feeds source
@@ -57,7 +57,7 @@ env:
   # hardware & repo info
   DEVICE_NAME: CMCC_XR30-eMMC
   CPU_TAG: mt7981b
-  FLASH_TAG: eMMC_8Gb
+  FLASH_TAG: 8GB_eMMC
   SOURCE_CODE: padavanonly(237)
   KERNEL_VERSION: kernel_6.6
   OUTPUT_FILENAME: padavanonly-24.10-ss-ace-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
@@ -161,7 +161,7 @@ jobs:
         cd openwrt
         ${{ secrets.PONLY2410_K66_REPO_PATCH }}
         ${{ secrets.FIRMWARE_DIY_SCRIPT }}
-        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_HOSTNAME }}
+        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_PATCH }}
         ${{ secrets.ARGON_THEME_CMCC }}
 
     - name: Restore configuration archive (バックアップした構成アーカイブを復元する)
