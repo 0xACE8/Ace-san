@@ -237,7 +237,7 @@ jobs:
       if: steps.compile.outputs.status == 'success' && steps.organize.outputs.status == 'success' && (github.event.inputs.upload_release == 'true' && github.event.inputs.upload_release  != 'false') || contains(github.event.action, 'upload_release')
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.CPU_TAG }}_${{ env.DEVICE_NAME }}_${{ env.FLASH_TAG }}}_${{ env.KERNEL_VERSION }}_${{ env.FILE_DATE }}
+        name: ${{ env.CPU_TAG }}_${{ env.DEVICE_NAME }}_${{ env.FLASH_TAG }}_${{ env.KERNEL_VERSION }}_${{ env.FILE_DATE }}
         allowUpdates: false
         tag: ${{ env.RELEASE_TAG }}
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -251,7 +251,7 @@ jobs:
           - 📝 ソースコード: ${{ env.SOURCE_CODE }}
           - 📦 リポジトリを: ${{ env.SOURCE_REPO }}
           - 🔀 ブランチ名前: ${{ secrets.PONLY2410_K66_REPO_BRANCH }}
-          - 🌐 接続アドレス: 192.168.***.1 または anna.lan
+          - 🌐 接続アドレス: 192.168.***.1
           - 🔑 パスワードは: なし
           ### ⚠️ 警告する ⚠️
           - ‼️現在のリポジトリによってコンパイルされたファームウェアはすべて非公開でカスタマイズされています。
