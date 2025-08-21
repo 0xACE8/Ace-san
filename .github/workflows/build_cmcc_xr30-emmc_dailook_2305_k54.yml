@@ -210,6 +210,9 @@ jobs:
       working-directory: ./openwrt
       run: |
         ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
+        cat >> .config <<-EOF
+        CONFIG_CCACHE=y
+        EOF
         echo "load config done."
         ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
         echo "load repo patch done."
