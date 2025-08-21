@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc_xr30-emmc dlook 23.05 kernel 5.4 actions.
+name: Build cmcc xr30-emmc dailook 23.05 kernel 5.4 actions.
 
 on:
   workflow_dispatch:
