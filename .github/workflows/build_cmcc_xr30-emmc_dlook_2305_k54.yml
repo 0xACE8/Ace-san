@@ -168,8 +168,8 @@ jobs:
     - name: Cache Toolchain (キャッシュツールチェーン)
       uses: HiGarfield/cachewrtbuild@main
       with:
-        ccache: false
-        mixkey: ${{ env.DEVICE_NAME }}-${{ env.SOURCE_CODE }}-${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
+        ccache: true
+        mixkey: MT7981b-${{ env.SOURCE_CODE }}-${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
         prefix: ${{ env.OPENWRT_PATH }}
 
     - name: Updata & install feeds (アップデートとフィードのインストール)
@@ -185,6 +185,9 @@ jobs:
       working-directory: ./openwrt
       run: |
         ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
+        cat >> .config <<-EOF
+        CONFIG_CCACHE=y
+        EOF        
         echo "load config done."
         ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
         echo "load repo patch done."
