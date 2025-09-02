@@ -60,7 +60,7 @@ env:
   FLASH_TAG: 8GB_eMMC
   SOURCE_CODE: padavanonly(237)
   KERNEL_VERSION: kernel_6.6
-  OUTPUT_FILENAME: padavanonly-24.10-ss-ace-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
+  OUTPUT_FILENAME: padavanonly-24.10-ace-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
   TZ: "Asia/Tokyo"
 
 jobs:
@@ -141,7 +141,7 @@ jobs:
     - name: Cache Toolchain (キャッシュツールチェーン)
       uses: HiGarfield/cachewrtbuild@main
       with:
-        ccache: false
+        ccache: true
         mixkey: ${{ env.DEVICE_NAME }}-${{ env.SOURCE_REPO }}-${{ secrets.PONLY2410_K66_REPO_BRANCH }}
         prefix: ${{ github.workspace }}/openwrt
 
