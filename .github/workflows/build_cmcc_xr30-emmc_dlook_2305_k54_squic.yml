@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc xr30-emmc dailook 23.05 kernel 5.4 actions.
+name: Build cmcc xr30-emmc dlook 23.05 kernel 5.4 shadowquic actions.
 
 on:
   workflow_dispatch:
@@ -22,25 +22,25 @@ on:
         type: boolean
         default: false
       upload_firmware:
-        description: 'Upload Firmware To Artifact (Artifactにアップロードする)'
+        description: 'Upload Firmware To Artifact (アーティファクトにアップロードする)'
         type: boolean
         default: false
       upload_release:
-        description: 'Upload Firmware To Release (ファームウェアをアップロードする)'
+        description: 'Upload Firmware To Release (リリースをアップロードする)'
         type: boolean
         default: false
   schedule:
     - cron: '0 19 * * 0'
 
 env:
-  # anna 2410
+  # dailook 23.05
   DLOOK2305_K54_REPO_URL: ${{ secrets.DLOOK2305_K54_REPO_URL }}
   DLOOK2305_K54_REPO_BRANCH: ${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
   DLOOK2305_K54_REPO_PATCH: ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
   # cmcc-xr30-emmc
   CMCC_XR30_EMMC_DLOOK2305_K54_PATCH: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_PATCH }}
   CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
-  CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP }}
+  CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP_SQUIC: ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP_SQUIC }}
   # feeds source
   ADD_FEED_SOURCE: ${{ secrets.ADD_FEED_SOURCE }}
   # diy script
@@ -60,7 +60,7 @@ env:
   FLASH_TAG: 8GB_eMMC
   SOURCE_CODE: dailook
   KERNEL_VERSION: kernel_5.4
-  OUTPUT_FILENAME: dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-sysupgrade
+  OUTPUT_FILENAME: dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-squic-sysupgrade
   TZ: "Asia/Tokyo"
 
 jobs:
@@ -169,7 +169,7 @@ jobs:
       id: check-cache
       uses: actions/cache@main
       with:
-          key: ${{ env.DEVICE_NAME }}-${{ env.SOURCE_CODE }}-${{ env.SOURCE_REPO }}-${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
+          key: MT7981b-${{ env.SOURCE_CODE }}-${{ env.SOURCE_REPO }}-${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
           restore-keys: ${{ env.DEVICE_NAME }}-${{ env.SOURCE_CODE }}-${{ env.SOURCE_REPO }}-${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
           path: |
             ./openwrt/.ccache
@@ -190,13 +190,6 @@ jobs:
             echo "caches missed!"
          fi
 
-#    - name: Cache Toolchain (キャッシュツールチェーン)
-#      uses: HiGarfield/cachewrtbuild@main
-#      with:
-#        ccache: false
-#        mixkey: ${{ env.DEVICE_NAME }}-${{ env.SOURCE_CODE }}-${{ secrets.DLOOK2305_K54_REPO_BRANCH }}
-#        prefix: ${{ env.OPENWRT_PATH }}
-
     - name: Updata & install feeds (アップデートとフィードのインストール)
       working-directory: ./openwrt
       run: |
@@ -210,9 +203,6 @@ jobs:
       working-directory: ./openwrt
       run: |
         ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_CONFIG }}
-        cat >> .config <<-EOF
-        CONFIG_CCACHE=y
-        EOF
         echo "load config done."
         ${{ secrets.DLOOK2305_K54_REPO_PATCH }}
         echo "load repo patch done."
@@ -227,9 +217,9 @@ jobs:
       if: (github.event.inputs.restore_configuration == 'true' && github.event.inputs.restore_configuration != 'false') || contains(github.event.action, 'restore_configuration') && !cancelled()
       working-directory: ./openwrt
       run: |
-        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP }}
+        ${{ secrets.CMCC_XR30_EMMC_DLOOK2305_K54_BACKUP_SQUIC }}
         echo "load config backup done."
-        echo "OUTPUT_FILENAME=dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-configured-sysupgrade" >> $GITHUB_ENV
+        echo "OUTPUT_FILENAME=dailook-23.05-ace-mt7981b-cmcc_xr30-emmc-kernel5.4-squic-configured-sysupgrade" >> $GITHUB_ENV
 
     - name: Download package (パッケージをダウンロード)
       working-directory: ./openwrt
