@@ -160,9 +160,13 @@ jobs:
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.ANNA2410_K66_REPO_PATCH }}
+        echo "repo patch done."
         ${{ secrets.FIRMWARE_DIY_SCRIPT }}
+        echo "diy script done."
         ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_PATCH }}
+        echo "patch done."
         ${{ secrets.ARGON_THEME_CMCC }}
+        echo "theme done."
 
     - name: Restore configuration archive (バックアップした構成アーカイブを復元する)
       if: (github.event.inputs.restore_configuration == 'true' && github.event.inputs.restore_configuration != 'false') || contains(github.event.action, 'restore_configuration') && !cancelled()
