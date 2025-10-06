@@ -142,7 +142,7 @@ jobs:
       uses: HiGarfield/cachewrtbuild@main
       with:
         ccache: true
-        mixkey: MT7981b-${{ env.SOURCE_CODE }}-${{ env.SOURCE_REPO }}-${{ KERNEL_VERSION }}-${{ secrets.ANNA2410_K66_REPO_BRANCH }}
+        mixkey: MT7981b-${{ env.SOURCE_CODE }}-${{ env.SOURCE_REPO }}-${{ env.KERNEL_VERSION }}-${{ secrets.ANNA2410_K66_REPO_BRANCH }}
         prefix: ${{ github.workspace }}/openwrt
 
     - name: Updata & install feeds (アップデートとフィードのインストール)
