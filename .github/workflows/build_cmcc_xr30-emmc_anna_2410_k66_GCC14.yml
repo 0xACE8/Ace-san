@@ -156,7 +156,7 @@ jobs:
 
     - name: Load custom configuration (カスタム構成を読み込む)
       run: |
-        ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_CONFIG }}
+        ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_GCC14_CONFIG }}
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.ANNA2410_K66_REPO_PATCH }}
