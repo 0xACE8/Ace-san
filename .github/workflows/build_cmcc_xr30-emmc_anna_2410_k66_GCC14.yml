@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc_xr30-emmc anna 24.10 kernel 6.6 actions.
+name: Build cmcc_xr30-emmc anna 24.10 kernel 6.6 gcc 14.x actions.
 
 on:
   workflow_dispatch:
@@ -29,8 +29,8 @@ on:
         description: 'Upload Firmware To Release (リリースをアップロードする)'
         type: boolean
         default: false
-#  schedule:
-#    - cron: '0 19 * * 0'
+  schedule:
+    - cron: '0 19 * * 0'
 
 env:
   # anna 2410
@@ -39,7 +39,7 @@ env:
   ANNA2410_K66_REPO_PATCH: ${{ secrets.ANNA2410_K66_REPO_PATCH }}
   # cmcc_xr30-emmc
   CMCC_XR30_EMMC_ANNA2410_K66_PATCH: ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_PATCH }}
-  CMCC_XR30_EMMC_ANNA2410_K66_CONFIG: ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_CONFIG }}
+  CMCC_XR30_EMMC_ANNA2410_K66_GCC14_CONFIG: ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_GCC14_CONFIG }}
   CMCC_XR30_EMMC_ANNA2410_K66_BACKUP: ${{ secrets.CMCC_XR30_EMMC_ANNA2410_K66_BACKUP }}
   # feeds source
   ADD_FEED_SOURCE: ${{ secrets.ADD_FEED_SOURCE }}
