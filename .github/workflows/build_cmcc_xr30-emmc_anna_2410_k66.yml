@@ -37,7 +37,6 @@ env:
   PONLY2410_K66_REPO_URL: ${{ secrets.PONLY2410_K66_REPO_URL }}
   PONLY2410_K66_REPO_BRANCH: ${{ secrets.PONLY2410_K66_REPO_BRANCH }}
   PONLY2410_K66_REPO_PATCH: ${{ secrets.PONLY2410_K66_REPO_PATCH }}
-  PONLY2410_K66_REPO_LUCI: ${{ secrets.PONLY2410_K66_REPO_LUCI }}
   # cmcc_xr30-emmc
   CMCC_XR30_EMMC_PONLY2410_K66_PATCH: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_PATCH }}
   CMCC_XR30_EMMC_PONLY2410_K66_CONFIG: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG }}
@@ -124,8 +123,10 @@ jobs:
         git clone $PONLY2410_K66_REPO_URL -b $PONLY2410_K66_REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        ${{ secrets.PONLY2410_K66_REPO_LUCI }}
+        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_PATCH }}
+        echo "CMCC_XR30_EMMC_PONLY2410_K66_PATCH done."
         ${{ secrets.ADD_FEED_SOURCE }}
+        echo "ADD_FEED_SOURCE done."
 
         # Remove All China download sources (中国からのダウンロードソースを削除する)
         PROJECT_MIRRORS_FILE="./scripts/projectsmirrors.json"
@@ -160,11 +161,9 @@ jobs:
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.PONLY2410_K66_REPO_PATCH }}
-        echo "repo patch done."
-        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_PATCH }}
-        echo "patch done."
+        echo "PONLY2410 K66 REPO PATCH done."
         ${{ secrets.ARGON_THEME_CMCC }}
-        echo "theme done."
+        echo "ARGON THEME CMCC done."
 
     - name: Restore configuration archive (バックアップした構成アーカイブを復元する)
       if: (github.event.inputs.restore_configuration == 'true' && github.event.inputs.restore_configuration != 'false') || contains(github.event.action, 'restore_configuration') && !cancelled()
