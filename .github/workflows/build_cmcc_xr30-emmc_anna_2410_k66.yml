@@ -161,6 +161,7 @@ jobs:
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.PONLY2410_K66_REPO_PATCH }}
+        cat package/system/ca-certificates/Makefile
         echo "PONLY2410 K66 REPO PATCH done."
         ${{ secrets.ARGON_THEME_CMCC }}
         echo "ARGON THEME CMCC done."
