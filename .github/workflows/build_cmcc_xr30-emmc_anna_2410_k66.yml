@@ -118,6 +118,12 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
+    - name: Setup Git Credentials
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        git config --global url."https://$ACCESS_TOKEN@github.com/".insteadOf "https://github.com/"
+
     - name: Clone source code (ソースコードのクローン)
       working-directory: /workdir
       run: |
