@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build cmcc_xr30-emmc anna 24.10 kernel 6.6 actions.
+name: Build cmcc_xr30-emmc annawrt 24.10 kernel 6.6 actions.
 
 on:
   workflow_dispatch:
@@ -46,8 +46,8 @@ env:
   # cmcc color theme
   ARGON_THEME_CMCC: ${{ secrets.ARGON_THEME_CMCC }}
   # token
-  ACCESS_SHA512SUM: ${{ secrets.ACCESS_SHA512SUM }}
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  ACCESS_SHA512SUM: ${{ secrets.ACCESS_SHA512SUM }}
   ACCESS_REPACKAGE: ${{ secrets.ACCESS_REPACKAGE }}
   # telegram bot
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -56,9 +56,9 @@ env:
   DEVICE_NAME: CMCC_XR30-eMMC
   CPU_TAG: mt7981b
   FLASH_TAG: 8GB_eMMC
-  SOURCE_CODE: anna
+  SOURCE_CODE: padanvanonly
   KERNEL_VERSION: kernel_6.6
-  OUTPUT_FILENAME: anna-24.10-ace-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
+  OUTPUT_FILENAME: annawrt-24.10-ace-mt7981b-cmcc_xr30-emmc-kernel_6.6-sysupgrade
   TZ: "Asia/Tokyo"
 
 jobs:
