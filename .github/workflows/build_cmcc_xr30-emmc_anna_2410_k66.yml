@@ -69,6 +69,19 @@ jobs:
       contents: write
 
     steps:
+    - name: Sync Plugin Source
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: 0xACE8
+        repo: ace8_package
+        github_token: ${{ secrets.ACCESS_TOKEN }}
+        workflow_file_name: sync.yml    
+        ref: openwrt-2410
+        wait_interval: 10
+        propagate_failure: true
+        trigger_workflow: true
+        wait_workflow: true
+
     - name: Checkout (チェックアウト)
       uses: actions/checkout@main
       with:
@@ -119,11 +132,9 @@ jobs:
         sudo chown $USER:$GROUPS /workdir
 
     - name: Setup Git Credentials
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
-        git config --global url."https://$ACCESS_TOKEN@github.com/".insteadOf "https://github.com/"
-
+        git config --global url."https://$ACCESS_TOKEN@github.com/0xACE8/".insteadOf "https://github.com/0xACE8/"
+        
     - name: Clone source code (ソースコードのクローン)
       working-directory: /workdir
       run: |
@@ -169,7 +180,6 @@ jobs:
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.PONLY2410_K66_REPO_PATCH }}
-        cat package/system/ca-certificates/Makefile
         echo "PONLY2410 K66 REPO PATCH done."
         ${{ secrets.ARGON_THEME_CMCC }}
         echo "ARGON THEME CMCC done."
