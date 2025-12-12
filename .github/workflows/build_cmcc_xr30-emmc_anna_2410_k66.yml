@@ -39,7 +39,7 @@ env:
   PONLY2410_K66_REPO_PATCH: ${{ secrets.PONLY2410_K66_REPO_PATCH }}
   # cmcc_xr30-emmc
   CMCC_XR30_EMMC_PONLY2410_K66_PATCH: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_PATCH }}
-  CMCC_XR30_EMMC_PONLY2410_K66_CONFIG: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG }}
+  CMCC_XR30_EMMC_PONLY2410_K66_CONFIG_SQ: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG_SQ }}
   CMCC_XR30_EMMC_PONLY2410_K66_BACKUP: ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_BACKUP }}
   # feeds source
   ADD_FEED_SOURCE: ${{ secrets.ADD_FEED_SOURCE }}
@@ -188,7 +188,7 @@ jobs:
 
     - name: Load custom configuration (カスタム構成を読み込む)
       run: |
-        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG }}
+        ${{ secrets.CMCC_XR30_EMMC_PONLY2410_K66_CONFIG_SQ }}
         mv .config openwrt/.config
         cd openwrt
         ${{ secrets.PONLY2410_K66_REPO_PATCH }}
